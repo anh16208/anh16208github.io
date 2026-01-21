@@ -1,0 +1,25 @@
+
+@supports (-webkit-touch-callout: none) {
+  /* Fix chung */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Fix cho text trong BirthdayCard */
+  .birthday-text-container {
+    white-space: pre-line !important;
+    line-height: 1.35 !important;
+  }
+  
+  /* Fix scroll mượt */
+  .scroll-container {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Fix font rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
