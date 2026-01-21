@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- QUAN TRỌNG: Meta tags cho audio autoplay -->
+    <meta name="theme-color" content="#ff6b6b">
+    <meta http-equiv="Content-Security-Policy" content="media-src * 'self' blob: data:;">
+    <title>Happy Birthday!</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <!-- SCRIPT ĐẶC BIỆT: Auto-interaction ngay khi load -->
+    <script>
+      (function() {
+        console.log('=== AUTO-AUDIO ACTIVATION SCRIPT ===');
+        
+        // 1. Tạo một silent audio và play ngay
+        function playSilentAudio() {
+          try {
+            const audio = new Audio();
+            audio.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ';
+            audio.volume = 0.000001;
+            
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+              playPromise.then(() => {
+                console.log('✅ Silent audio played');
+                audio.pause();
+              }).catch(e => {
+                console.log('Silent audio failed:', e);
+              });
+            }
+          } catch (e) {
+            console.log('Silent audio error:', e);
+          }
+        }
+        
+        // 2. Chạy ngay khi page load
+        playSilentAudio();
+        
+        // 3. Tạo sự kiện tương tác ảo
+        function simulateUserInteraction() {
+          console.log('Simulating user interaction for audio');
+          
+          // Tạo các sự kiện
+          ['click', 'mousedown', 'touchstart', 'keydown'].forEach(eventType => {
+            const event = new Event(eventType, { bubbles: true, cancelable: true });
+            document.dispatchEvent(event);
+            window.dispatchEvent(event);
+          });
+          
+          // Click ảo vào body
+          setTimeout(() => {
+            const clickEvent = new MouseEvent('click', {
+              view: window,
+              bubbles: true,
+              cancelable: true
+            });
+            document.body.click();
+            document.body.dispatchEvent(clickEvent);
+          }, 100);
+        }
+        
+        // 4. Chạy tương tác ảo sau 800ms
+        setTimeout(simulateUserInteraction, 800);
+        
+        // 5. Thêm event listener cho bất kỳ tương tác thật nào
+        document.addEventListener('click', function handleRealClick() {
+          console.log('Real user interaction detected!');
+          document.removeEventListener('click', handleRealClick);
+        });
+        
+      })();
+    </script>
+    
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
